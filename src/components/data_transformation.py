@@ -11,7 +11,7 @@ from sklearn.pipeline import Pipeline
 
 from src.logger import logging
 from src.exception import CustomException
-from src import utils
+from src.utils import save_object,Time_diff_bw_order_and_pickup,str_min
 
 
 @dataclass
@@ -55,9 +55,9 @@ class DataTransformation:
                 ('numerical pipeline', num_pipeline,numerical_columns),
                 ('categorical pipeline',cat_pipeline,categorical_columns)
             ])
-
+            logging.info('Pipeline completed')  
             return preprocessor
-            logging.info('Pipeline completed')
+            
 
         except Exception as e:
             logging.info('Error in data transformation')
@@ -100,11 +100,11 @@ class DataTransformation:
 
             preprocessing_object = self.get_data_transformation_object()
 
-            input_feature_train_df = train_df.drop(columns=['Time_taken (min)','ID'],axis=1)
-            target_feature_train_df = train_df['Time_Order_picked']
+            input_feature_train_df = train_df.drop(columns=['Time_taken (min)'],axis=1)
+            target_feature_train_df = train_df['Time_taken (min)']
 
-            input_feature_test_df = test_df.drop(columns=['Time_taken (min)','ID'],axis=1)
-            target_feature_test_df = train_df['Time_Order_picked']
+            input_feature_test_df = test_df.drop(columns=['Time_taken (min)'],axis=1)
+            target_feature_test_df = test_df['Time_taken (min)']
 
             #Transforming using preprocessor
             input_feature_train_arr = preprocessing_object.fit_transform(input_feature_train_df)
@@ -120,6 +120,8 @@ class DataTransformation:
                 obj = preprocessing_object
             )
 
+            logging.info('Preprocessor pickle file saved')
+
             return (
                 train_arr,test_arr,self.data_transformation_config.preprocessor_obj_file_path
             )
@@ -128,5 +130,3 @@ class DataTransformation:
             logging.info('Exception occured in initiate data transformation')
             raise CustomException(e,sys)
         
-if __name__=='__main__':
-    print('Working just fine')        
