@@ -56,6 +56,7 @@ class DataTransformation:
                 ('categorical pipeline',cat_pipeline,categorical_columns)
             ])
             logging.info('Pipeline completed')  
+        
             return preprocessor
             
 
@@ -72,52 +73,51 @@ class DataTransformation:
             logging.info(f'Train DataFrame head \n{train_df.head().to_string}')
             logging.info(f'Test DataFrame head \n{test_df.head().to_string}')
 
-            logging.info('Training data cleaning starts')
+            logging.info('Data cleaning starts')
 
             train_df.drop(columns=['Order_Date','ID','Restaurant_latitude','Restaurant_longitude','Delivery_person_ID'],axis=1,inplace=True)
+            test_df.drop(columns=['Order_Date','ID','Restaurant_latitude','Restaurant_longitude','Delivery_person_ID'],axis=1,inplace=True)
 
             train_df['Time_Orderd_min'] = train_df['Time_Orderd'].fillna(train_df['Time_Orderd'].mode()[0]).str.split(':').apply(str_min)
             train_df['Time_Order_picked_min'] = train_df['Time_Order_picked'].fillna(train_df['Time_Orderd'].mode()[0]).str.split(':').apply(str_min)
             train_df.drop(columns=['Time_Orderd','Time_Order_picked'],axis=1,inplace=True)
 
-            Time_diff_bw_order_and_pickup(train_df)
-
-            logging.info('Training data cleaning completed')
-
-            logging.info('Testing data cleaning starts')
-
-            test_df.drop(columns=['Order_Date','ID','Restaurant_latitude','Restaurant_longitude','Delivery_person_ID'],axis=1,inplace=True)
-
             test_df['Time_Orderd_min'] = test_df['Time_Orderd'].fillna(test_df['Time_Orderd'].mode()[0]).str.split(':').apply(str_min)
             test_df['Time_Order_picked_min'] = test_df['Time_Order_picked'].fillna(test_df['Time_Orderd'].mode()[0]).str.split(':').apply(str_min)
             test_df.drop(columns=['Time_Orderd','Time_Order_picked'],axis=1,inplace=True)
 
+            Time_diff_bw_order_and_pickup(train_df)
             Time_diff_bw_order_and_pickup(test_df)
 
-            logging.info('Testing data cleaning completed')
+            logging.info('Data cleaning completed')
 
             logging.info('Obtaining preprocessing object')
 
-            preprocessing_object = self.get_data_transformation_object()
+            preprocessing_obj = self.get_data_transformation_object()
 
             input_feature_train_df = train_df.drop(columns=['Time_taken (min)'],axis=1)
             target_feature_train_df = train_df['Time_taken (min)']
 
-            input_feature_test_df = test_df.drop(columns=['Time_taken (min)'],axis=1)
-            target_feature_test_df = test_df['Time_taken (min)']
+            input_feature_test_df = train_df.drop(columns=['Time_taken (min)'],axis=1)
+            target_feature_test_df = train_df['Time_taken (min)']
 
-            #Transforming using preprocessor
-            input_feature_train_arr = preprocessing_object.fit_transform(input_feature_train_df)
-            input_feature_test_arr = preprocessing_object.fit_transform(input_feature_test_df)
+             ## Transformating using preprocessor obj
+            input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
+            input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
 
-            logging.info('Applying preprocessing object on training and testing data')
+            # print(pd.DataFrame(input_feature_train_arr).dtypes)
+            # print(pd.DataFrame(input_feature_test_arr).dtypes)
 
-            train_arr = np.c_[input_feature_train_arr,np.array(input_feature_train_df)]
-            test_arr = np.c_[input_feature_test_arr,np.array(input_feature_test_df)]
+            logging.info("Applying preprocessing object on training and testing datasets.")
+            
+
+            train_arr = np.c_[input_feature_train_arr, np.array(target_feature_train_df)]
+            test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
+
 
             save_object(
                 file_path=self.data_transformation_config.preprocessor_obj_file_path,
-                obj = preprocessing_object
+                obj = preprocessing_obj
             )
 
             logging.info('Preprocessor pickle file saved')
