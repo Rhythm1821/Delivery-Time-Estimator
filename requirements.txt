@@ -2,4 +2,5 @@
 # numpy
 # seaborn
 scikit-learn
+Flask
 -e .
