@@ -3,11 +3,11 @@
         <form action="{{url_for('predict')}}",method="POST">
         <div class="form-group">
             <label for="Delivery_person_Ratings">Delivery_person_Age:</label>
-            <input type="text" id='Delivery_person_Age',name='Delivery_person_Age',placeholder=''>
+            <input type="text" id='Delivery_person_Ratings',name='Delivery_person_Ratings',placeholder='Enter the rating of the delivery boy'>
         </div>
         <div class="form-group">
             <label for="Delivery_person_Ratings">Delivery_person_Ratings:</label>
-            <input type="text" id='Delivery_person_Ratings',name='Delivery_person_Ratings',placeholder=''>
+            <input type="text" id='Delivery_person_Age',name='Delivery_person_Age',placeholder='Enter the age of the delivery boy'>
         </div>
         <div class="form-group">
             <label for="Delivery_location_latitude">Delivery_location_latitude:</label>
@@ -19,11 +19,21 @@
         </div>
         <div class="form-group">
             <label for="Vehicle_condition">Vehicle_condition:</label>
-            <input type="text" id='Vehicle_condition',name='Vehicle_condition',placeholder=''>
+            <select name="Vehicle_condition" id="Vehicle_condition">
+                <option value="0"></option>
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+            </select>
         </div>
         <div class="form-group">
             <label for="multiple_deliveries">multiple_deliveries:</label>
-            <input type="text" id='multiple_deliveries',name='multiple_deliveries',placeholder=''>
+            <select name="multiple_deliveries" id="multiple_deliveries">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="Time_Orderd">Time_Orderd:</label>
@@ -35,27 +45,57 @@
         </div>
         <div class="form-group">
             <label for="Weather_conditions">Weather_conditions:</label>
-            <input type="text" id='Weather_conditions',name='Weather_conditions',placeholder=''>
+            <select name="Weather_conditions" id="Weather_conditions">
+                <option value="bicycle">bicycle</option>
+                <option value="electric_scooter">electric_scooter</option>
+                <option value="scooter">scooter</option>
+                <option value="motorcycle">motorcycle</option>
+            </select>
         </div>
         <div class="form-group">
             <label for="Road_traffic_density">Road_traffic_density:</label>
-            <input type="text" id='Road_traffic_density',name='Road_traffic_density',placeholder=''>
+            <select name="Road_traffic_density" id="Road_traffic_density">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select>
         </div>
         <div class="form-group">
             <label for="Type_of_order">Type_of_order:</label>
-            <input type="text" id='Type_of_order',name='Type_of_order',placeholder=''>
+            <select name="Type_of_order" id="Type_of_order">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select>
         </div>
         <div class="form-group">
             <label for="Type_of_vehicle">Type_of_vehicle:</label>
-            <input type="text" id='Type_of_vehicle',name='Type_of_vehicle',placeholder=''>
+            <select name="Type_of_vehicle" id="Type_of_vehicle">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select>
         </div>
         <div class="form-group">
             <label for="Festival">Festival:</label>
-            <input type="text" id='Festival',name='Festival',placeholder=''>
+            <select name="Festival" id="Festival">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select>
         </div>
         <div class="form-group">
             <label for="City">City:</label>
-            <input type="text" id='City',name='City',placeholder=''>
+            <select name="City" id="City">
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select>
         </div>
         
     </form>
