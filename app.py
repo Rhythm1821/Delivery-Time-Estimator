@@ -17,7 +17,7 @@ def predict():
             Delivery_person_Ratings = float(request.form.get('Delivery_person_Ratings')),
             Delivery_location_latitude = float(request.form.get('Delivery_location_latitude')),
             Delivery_location_longitude = float(request.form.get('Delivery_location_longitude')),
-            Vehicle_condition = request.form.get('Vehicle_condition'),
+            Vehicle_condition = float(request.form.get('Vehicle_condition')),
             multiple_deliveries = float(request.form.get('multiple_deliveries')),
             Time_Orderd = request.form.get('Time_Orderd'),
             Time_Order_picked = request.form.get('Time_Order_picked'),
