@@ -1,5 +1,6 @@
 from flask import Flask,render_template,request,url_for
 from src.pipeline.prediction_pipeline import CustomData,PredictPipeline
+from src.logger import logging
 
 app = Flask(__name__)
 
@@ -12,6 +13,7 @@ def predict():
     if request.method=='GET':
         return render_template('form.html')
     else:
+        logging.info('Gathering data')
         data=CustomData(
             Delivery_person_Age=float(request.form.get('Delivery_person_Age')),
             Delivery_person_Ratings = float(request.form.get('Delivery_person_Ratings')),
@@ -32,7 +34,7 @@ def predict():
         predict_pipeline = PredictPipeline()
         pred = predict_pipeline.predict(final_new_data)
 
-        results = round(pred,2)
+        results = round(pred[0],2)
 
         return render_template('result.html',final_result=results)
 

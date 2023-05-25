@@ -1,21 +1,21 @@
 <html>
     <body>
-        <form action="{{url_for('predict')}}",method="POST">
+        <form action="/predict" method="POST">
             <div class="form-group">
-                <label for="Delivery_person_Ratings">Delivery_person_Age:</label>
-                <input type="text" id='Delivery_person_Ratings',name='Delivery_person_Ratings',placeholder='Enter the rating of the delivery boy'>
+                <label for="Delivery_person_Age">Delivery_person_Age:</label>
+                <input type="text" id='Delivery_person_Age' name='Delivery_person_Age'>
             </div>
             <div class="form-group">
                 <label for="Delivery_person_Ratings">Delivery_person_Ratings:</label>
-                <input type="text" id='Delivery_person_Age',name='Delivery_person_Age',placeholder='Enter the age of the delivery boy'>
+                <input type="text" id='Delivery_person_Ratings' name='Delivery_person_Ratings'>
             </div>
             <div class="form-group">
                 <label for="Delivery_location_latitude">Delivery_location_latitude:</label>
-                <input type="text" id='Delivery_location_latitude',name='Delivery_location_latitude',placeholder=''>
+                <input type="text" id='Delivery_location_latitude' name='Delivery_location_latitude'>
             </div>
             <div class="form-group">
                 <label for="Delivery_location_longitude">Delivery_location_longitude:</label>
-                <input type="text" id='Delivery_location_longitude',name='Delivery_location_longitude',placeholder=''>
+                <input type="text" id='Delivery_location_longitude' name='Delivery_location_longitude'>
             </div>
             <div class="form-group">
                 <label for="Vehicle_condition">Vehicle_condition:</label>
@@ -37,11 +37,11 @@
             </div>
             <div class="form-group">
                 <label for="Time_Orderd">Time_Orderd:</label>
-                <input type="text" id='Time_Orderd',name='Time_Orderd'>
+                <input type="text" id='Time_Orderd' name='Time_Orderd'>
             </div>
             <div class="form-group">
                 <label for="Time_Order_picked">Time_Order_picked:</label>
-                <input type="text" id='Time_Order_picked',name='Time_Order_picked',placeholder=''>
+                <input type="text" id='Time_Order_picked' name='Time_Order_picked'>
             </div>
             <div class="form-group">
                 <label for="Weather_conditions">Weather_conditions:</label>
@@ -75,10 +75,10 @@
             <div class="form-group">
                 <label for="Type_of_vehicle">Type_of_vehicle:</label>
                 <select name="Type_of_vehicle" id="Type_of_vehicle">
-                    <option value="">bicycle</option>
-                    <option value="">electric_scooter</option>
-                    <option value="">scooter</option>
-                    <option value="">motorcycle</option>
+                    <option value="bicycle">bicycle</option>
+                    <option value="electric_scooter">electric_scooter</option>
+                    <option value="scooter">scooter</option>
+                    <option value="motorcycle">motorcycle</option>
                 </select>
             </div>
             <div class="form-group">
@@ -96,7 +96,9 @@
                     <option value="Semi-Urban">Semi-Urban</option>
                 </select>
             </div>
+            <!-- <div style="clear:both;"></div> -->
             <input type="submit" value="Submit">
+            <!-- <button type="button" onclick="predict()">Submit</button> -->
     </form>
     </body>
 </html>

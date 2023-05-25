@@ -105,9 +105,6 @@ class DataTransformation:
             input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
 
-            # print(pd.DataFrame(input_feature_train_arr).dtypes)
-            # print(pd.DataFrame(input_feature_test_arr).dtypes)
-
             logging.info("Applying preprocessing object on training and testing datasets.")
             
 
@@ -123,7 +120,9 @@ class DataTransformation:
             logging.info('Preprocessor pickle file saved')
 
             return (
-                train_arr,test_arr,self.data_transformation_config.preprocessor_obj_file_path
+                train_arr,
+                test_arr,
+                self.data_transformation_config.preprocessor_obj_file_path
             )
 
         except Exception as e:

@@ -65,3 +65,26 @@ def load_object(file_path):
             return pickle.load(file_obj)
     except Exception as e:
         logging.info('Exception occured while loading object')
+        raise CustomException(e,sys)
+    
+def str_min(x):
+    min=0
+    if type(x)==list:
+        if len(x)>1:
+            min = x[1]
+        else:
+            min = int(float(x[0])*60)
+    return int(min)
+    
+
+    
+def Time_diff_bw_order_and_pickup(df):
+    x = []
+    for i in range(len(df)):
+        if df['Time_Order_picked_min'][i] < df['Time_Orderd_min'][i]:
+            x.append(df['Time_Order_picked_min'][i] + (60-df['Time_Orderd_min'][i]))
+        else:
+            x.append(df['Time_Order_picked_min'][i] - df['Time_Orderd_min'][i])
+    df['Time_diff_bw_order_and_pickup'] = x
+    df.drop(columns=['Time_Orderd_min','Time_Order_picked_min'],axis=1,inplace=True)
+    return df
